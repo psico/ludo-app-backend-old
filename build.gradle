@@ -13,12 +13,14 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.graphql-java:graphql-java' // NEW
+	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc' // NEW
+	implementation 'com.google.guava:guava' // NEW
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	implementation 'com.google.guava:guava:29.0-jre'
 }
 
 test {
