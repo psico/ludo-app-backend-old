@@ -69,4 +69,15 @@ public class GraphQLDataFetchers {
             return book.get("totalPages");
         };
     }
+
+    public DataFetcher getUserInfoById() {
+        return dataFetchingEnvironment -> {
+            String bookId = dataFetchingEnvironment.getArgument("id");
+            return books
+                    .stream()
+                    .filter(book -> book.get("id").equals(bookId))
+                    .findFirst()
+                    .orElse(null);
+        };
+    }
 }
