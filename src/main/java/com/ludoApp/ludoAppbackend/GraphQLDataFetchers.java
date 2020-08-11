@@ -38,6 +38,15 @@ public class GraphQLDataFetchers {
                     "lastName", "Rice")
     );
 
+    private static List<Map<String, String>> userInfo = Arrays.asList(
+            ImmutableMap.of("id", "author-1",
+                    "name", "Teste 6",
+                    "uid", "j14sp1oVjib0zW93pE3eBCGT4wx1"),
+            ImmutableMap.of("id", "author-2",
+                    "name", "Desenvolvedor JG",
+                    "uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32")
+    );
+
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
             String bookId = dataFetchingEnvironment.getArgument("id");
@@ -72,10 +81,10 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getUserInfoById() {
         return dataFetchingEnvironment -> {
-            String bookId = dataFetchingEnvironment.getArgument("id");
-            return books
+            String userUid = dataFetchingEnvironment.getArgument("uid");
+            return userInfo
                     .stream()
-                    .filter(book -> book.get("id").equals(bookId))
+                    .filter(userInfo -> userInfo.get("uid").equals(userUid))
                     .findFirst()
                     .orElse(null);
         };
