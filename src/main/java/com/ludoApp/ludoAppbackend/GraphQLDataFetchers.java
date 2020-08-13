@@ -39,12 +39,19 @@ public class GraphQLDataFetchers {
     );
 
     private static List<Map<String, String>> userInfo = Arrays.asList(
-            ImmutableMap.of("id", "author-1",
+            ImmutableMap.of("id", "9gwyi7B6PHBr0RDuSHwS",
                     "name", "Teste 6",
                     "uid", "j14sp1oVjib0zW93pE3eBCGT4wx1"),
-            ImmutableMap.of("id", "author-2",
+            ImmutableMap.of("id", "wAoGIkyZ1L50Kba9CAlf",
                     "name", "Desenvolvedor JG",
                     "uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32")
+    );
+
+    private static List<Map<String, String>> friendsList = Arrays.asList(
+            ImmutableMap.of("uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
+                    "name", "Desenvolvedor JG"),
+            ImmutableMap.of("uid", "MHIMaAOuYZY9RCmQxP4CckIcpQi2",
+                    "name", "MailparaJG")
     );
 
     public DataFetcher getBookByIdDataFetcher() {
@@ -81,12 +88,25 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getUserInfoById() {
         return dataFetchingEnvironment -> {
-            String userUid = dataFetchingEnvironment.getArgument("uid");
+            String userUid = dataFetchingEnvironment.getArgument("id");
             return userInfo
                     .stream()
-                    .filter(userInfo -> userInfo.get("uid").equals(userUid))
+                    .filter(userInfo -> userInfo.get("id").equals(userUid))
                     .findFirst()
                     .orElse(null);
         };
     }
+
+    public DataFetcher getFriendsDataFetcher() {
+        return dataFetchingEnvironment -> {
+            Map<String,String> friend = dataFetchingEnvironment.getSource();
+            String friendsId = friend.get("uid");
+            return friendsList
+                    .stream()
+                    .filter(friends -> friends.get("uid").equals(friendsId))
+                    .findFirst()
+                    .orElse(null);
+        };
+    }
+
 }
