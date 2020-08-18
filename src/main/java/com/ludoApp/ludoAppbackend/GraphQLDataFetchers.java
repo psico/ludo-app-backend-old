@@ -38,13 +38,23 @@ public class GraphQLDataFetchers {
                     "lastName", "Rice")
     );
 
-    private static List<Map<String, String>> userInfo = Arrays.asList(
+    private static List<Map<String, Object>> userInfo = Arrays.asList(
             ImmutableMap.of("uid", "9gwyi7B6PHBr0RDuSHwS",
                     "name", "Teste 6",
-                    "friendUid", "0IhNFZFa7QMwBY6yZT8l24L1AX32"),
+                    "friends", Arrays.asList(
+                            ImmutableMap.of(
+                                    "name", "teste 5",
+                                    "uid", "39K3LW8i3BU7e9yatuoSfFuAkAc2"
+                            )
+                    )),
             ImmutableMap.of("uid", "wAoGIkyZ1L50Kba9CAlf",
                     "name", "Desenvolvedor JG",
-                    "friendUid", "0IhNFZFa7QMwBY6yZT8l24L1AX32")
+                    "friends", Arrays.asList(
+                            ImmutableMap.of(
+                                    "name", "teste 5",
+                                    "uid", "39K3LW8i3BU7e9yatuoSfFuAkAc2"
+                            )
+                    ))
     );
 
     private static List<Map<String, String>> friendsList = Arrays.asList(
