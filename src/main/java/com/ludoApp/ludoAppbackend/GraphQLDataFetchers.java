@@ -109,15 +109,7 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getFriendsDataFetcher() {
         return dataFetchingEnvironment -> {
-            Map<String,String> userInfo = dataFetchingEnvironment.getSource();
-//            String friendsId = userInfo.get("friendUid");
-            List<Map<String, Object>> friendsId = Arrays.asList(ImmutableMap.of(
-                    "uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
-                    "name", "Desenvolvedor JG"
-            ), ImmutableMap.of(
-                    "uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
-                    "name", "Desenvolvedor JG"
-            ));
+//            Map<String,String> userInfo = dataFetchingEnvironment.getSource();
             return friendsList;
         };
     }
