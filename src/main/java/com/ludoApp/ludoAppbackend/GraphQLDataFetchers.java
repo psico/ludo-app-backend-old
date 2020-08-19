@@ -110,12 +110,15 @@ public class GraphQLDataFetchers {
     public DataFetcher getFriendsDataFetcher() {
         return dataFetchingEnvironment -> {
             Map<String,String> userInfo = dataFetchingEnvironment.getSource();
-            String friendsId = userInfo.get("friendUid");
-            return friendsList
-                    .stream()
-                    .filter(friends -> friends.get("uid").equals(friendsId))
-                    .findFirst()
-                    .orElse(null);
+//            String friendsId = userInfo.get("friendUid");
+            List<Map<String, Object>> friendsId = Arrays.asList(ImmutableMap.of(
+                    "uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
+                    "name", "Desenvolvedor JG"
+            ), ImmutableMap.of(
+                    "uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
+                    "name", "Desenvolvedor JG"
+            ));
+            return friendsList;
         };
     }
 
