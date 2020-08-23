@@ -48,7 +48,7 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         FirebaseOptions options;
-        try (FileInputStream serviceAccount = new FileInputStream("E:\\DESENVOLVIMENTO\\ludoapp-b612-firebase-adminsdk-4c863-3aa26efa30.json")) {
+        try (FileInputStream serviceAccount = new FileInputStream("firebase_connection.json")) {
 
             options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
