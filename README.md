@@ -7,3 +7,6 @@ Developed by João Gabriel - Github [psico](https://github.com/psico)
 
 # Description
 Project to build social network for boardgames, register matches and challenge yourself in search of achievements
+
+# How to RUN
+Create a file named firebase_connection.json, copy firebase_connection.sample.json and rename, so use your firebase connection
