@@ -56,3 +56,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### PROJECT ###
+/firebase_connection.json
