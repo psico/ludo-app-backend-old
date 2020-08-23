@@ -5,6 +5,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.FirebaseDatabase;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.*;
@@ -55,7 +56,9 @@ public class GraphQLProvider {
                     .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
                     .build();
 
-            FirebaseApp.initializeApp(options);
+            FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
+            FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
+            System.out.println(defaultDatabase);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
