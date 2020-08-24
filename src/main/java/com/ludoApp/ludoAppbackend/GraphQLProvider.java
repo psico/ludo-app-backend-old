@@ -5,7 +5,8 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.*;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.*;
@@ -58,7 +59,25 @@ public class GraphQLProvider {
 
             FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
             FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
-            System.out.println(defaultDatabase);
+
+            DatabaseReference ref = defaultDatabase.getReference("src/main/resources/models/UserInfo.java");
+
+            // Attach a listener to read the data at our posts reference
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
+                    System.out.println(post);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+
+
+            //            System.out.println(ref);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
