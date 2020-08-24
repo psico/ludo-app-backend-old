@@ -60,21 +60,21 @@ public class GraphQLProvider {
             FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
             FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
 
-            DatabaseReference ref = defaultDatabase.getReference("src/main/resources/models/UserInfo.java");
+            DatabaseReference ref = defaultDatabase.getReference("usersInfo");
 
-            // Attach a listener to read the data at our posts reference
-            ref.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
-                    System.out.println(post);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
+//            // Attach a listener to read the data at our posts reference
+//            ref.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
+//                    System.out.println(post);
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                    System.out.println("The read failed: " + databaseError.getCode());
+//                }
+//            });
 
 
             //            System.out.println(ref);
