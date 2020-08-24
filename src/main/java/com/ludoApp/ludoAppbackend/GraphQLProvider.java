@@ -5,7 +5,6 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.*;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -60,21 +59,24 @@ public class GraphQLProvider {
             FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
             FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
 
-            DatabaseReference ref = defaultDatabase.getReference("usersInfo");
+            DatabaseReference ref = defaultDatabase.getReference("/usersInfo/wAoGIkyZ1L50Kba9CAlf");
 
-//            // Attach a listener to read the data at our posts reference
-//            ref.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
-//                    System.out.println(post);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    System.out.println("The read failed: " + databaseError.getCode());
-//                }
-//            });
+            // Attach a listener to read the data at our posts reference
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    System.out.println(dataSnapshot.getKey());
+                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
+                    System.out.println(post);
+                    System.out.println(post.name);
+                    System.out.println(post.uid);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
 
 
             //            System.out.println(ref);
