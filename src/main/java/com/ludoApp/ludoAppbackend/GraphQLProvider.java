@@ -1,10 +1,15 @@
 package com.ludoApp.ludoAppbackend;
 
+import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.*;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -18,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class GraphQLProvider {
@@ -57,26 +64,46 @@ public class GraphQLProvider {
                     .build();
 
             FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
-            FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
+            Firestore db = FirestoreClient.getFirestore();
 
-            DatabaseReference ref = defaultDatabase.getReference("/usersInfo/wAoGIkyZ1L50Kba9CAlf");
+            // asynchronously retrieve all users
+            ApiFuture<QuerySnapshot> query = db.collection("usersInfo").get();
+// ...
+// query.get() blocks on response
+            QuerySnapshot querySnapshot = query.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                System.out.println(document);
+                System.out.println("UID: " + document.getId());
+                System.out.println("Name: " + document.getString("name"));
+//                if (document.contains("middle")) {
+//                    System.out.println("Middle: " + document.getString("middle"));
+//                }
+//                System.out.println("Last: " + document.getString("last"));
+//                System.out.println("Born: " + document.getLong("born"));
+            }
 
-            // Attach a listener to read the data at our posts reference
-            ref.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getKey());
-                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
-                    System.out.println(post);
-                    System.out.println(post.name);
-                    System.out.println(post.uid);
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("The read failed: " + databaseError.getCode());
-                }
-            });
+//            FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
+//
+//            DatabaseReference ref = defaultDatabase.getReference("/usersInfo/wAoGIkyZ1L50Kba9CAlf");
+//
+//            // Attach a listener to read the data at our posts reference
+//            ref.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    System.out.println(dataSnapshot.getKey());
+//                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
+//                    System.out.println(post);
+//                    System.out.println(post.name);
+//                    System.out.println(post.uid);
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                    System.out.println("The read failed: " + databaseError.getCode());
+//                }
+//            });
 
 
             //            System.out.println(ref);
@@ -84,8 +111,11 @@ public class GraphQLProvider {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-
 
 
 //        FirebaseOptions options = new FirebaseOptions.Builder()
