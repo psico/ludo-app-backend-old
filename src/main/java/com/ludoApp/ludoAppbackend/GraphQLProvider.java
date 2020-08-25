@@ -63,13 +63,12 @@ public class GraphQLProvider {
                     .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
                     .build();
 
-            FirebaseApp defaultApp = FirebaseApp.initializeApp(options);
+            FirebaseApp.initializeApp(options);
             Firestore db = FirestoreClient.getFirestore();
 
-            // asynchronously retrieve all users
+
             ApiFuture<QuerySnapshot> query = db.collection("usersInfo").get();
-// ...
-// query.get() blocks on response
+
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
@@ -82,31 +81,6 @@ public class GraphQLProvider {
 //                System.out.println("Last: " + document.getString("last"));
 //                System.out.println("Born: " + document.getLong("born"));
             }
-
-
-//            FirebaseDatabase defaultDatabase = FirebaseDatabase.getInstance();
-//
-//            DatabaseReference ref = defaultDatabase.getReference("/usersInfo/wAoGIkyZ1L50Kba9CAlf");
-//
-//            // Attach a listener to read the data at our posts reference
-//            ref.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    System.out.println(dataSnapshot.getKey());
-//                    UserInfo post = dataSnapshot.getValue(UserInfo.class);
-//                    System.out.println(post);
-//                    System.out.println(post.name);
-//                    System.out.println(post.uid);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    System.out.println("The read failed: " + databaseError.getCode());
-//                }
-//            });
-
-
-            //            System.out.println(ref);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
