@@ -55,41 +55,7 @@ public class GraphQLProvider {
     }
 
     private RuntimeWiring buildWiring() {
-        FirebaseOptions options;
-        try (FileInputStream serviceAccount = new FileInputStream("firebase_connection.json")) {
 
-            options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
-                    .build();
-
-            FirebaseApp.initializeApp(options);
-            Firestore db = FirestoreClient.getFirestore();
-
-
-            ApiFuture<QuerySnapshot> query = db.collection("usersInfo").get();
-
-            QuerySnapshot querySnapshot = query.get();
-            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-            for (QueryDocumentSnapshot document : documents) {
-                System.out.println(document);
-                System.out.println("UID: " + document.getId());
-                System.out.println("Name: " + document.getString("name"));
-//                if (document.contains("middle")) {
-//                    System.out.println("Middle: " + document.getString("middle"));
-//                }
-//                System.out.println("Last: " + document.getString("last"));
-//                System.out.println("Born: " + document.getLong("born"));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
 
 //        FirebaseOptions options = new FirebaseOptions.Builder()
