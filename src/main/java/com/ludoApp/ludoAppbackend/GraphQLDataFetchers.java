@@ -1,12 +1,24 @@
 package com.ludoApp.ludoAppbackend;
 
+import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.common.collect.ImmutableMap;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 @Component
 public class GraphQLDataFetchers {
@@ -65,6 +77,42 @@ public class GraphQLDataFetchers {
     );
 
     public DataFetcher getBookByIdDataFetcher() {
+        FirebaseOptions options;
+        try (FileInputStream serviceAccount = new FileInputStream("firebase_connection.json")) {
+
+            options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
+                    .build();
+
+            FirebaseApp.initializeApp(options);
+            Firestore db = FirestoreClient.getFirestore();
+
+
+            ApiFuture<QuerySnapshot> query = db.collection("usersInfo").get();
+
+            QuerySnapshot querySnapshot = query.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                System.out.println(document);
+                System.out.println("UID: " + document.getId());
+                System.out.println("Name: " + document.getString("name"));
+//                if (document.contains("middle")) {
+//                    System.out.println("Middle: " + document.getString("middle"));
+//                }
+//                System.out.println("Last: " + document.getString("last"));
+//                System.out.println("Born: " + document.getLong("born"));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         return dataFetchingEnvironment -> {
             String bookId = dataFetchingEnvironment.getArgument("id");
             return books
