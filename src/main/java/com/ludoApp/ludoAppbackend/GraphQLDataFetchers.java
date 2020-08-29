@@ -69,12 +69,14 @@ public class GraphQLDataFetchers {
                     ))
     );
 
-    private static List<Map<String, String>> friendsList = Arrays.asList(
-            ImmutableMap.of("uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
-                    "name", "Desenvolvedor JG"),
-            ImmutableMap.of("uid", "MHIMaAOuYZY9RCmQxP4CckIcpQi2",
-                    "name", "MailparaJG")
-    );
+//    private static List<Map<String, String>> friendsList = Arrays.asList(
+//            ImmutableMap.of("uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
+//                    "name", "Desenvolvedor JG"),
+//            ImmutableMap.of("uid", "MHIMaAOuYZY9RCmQxP4CckIcpQi2",
+//                    "name", "MailparaJG")
+//    );
+
+    private static List<Map<String, String>> friendsList;
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
@@ -140,6 +142,10 @@ public class GraphQLDataFetchers {
                 System.out.println(document);
                 System.out.println("UID: " + document.getId());
                 System.out.println("Name: " + document.getString("name"));
+                friendsList.add(ImmutableMap.of(
+                        "uid", document.getId(),
+                        "name", document.getString("name")
+                ));
 //                if (document.contains("middle")) {
 //                    System.out.println("Middle: " + document.getString("middle"));
 //                }
