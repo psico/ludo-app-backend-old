@@ -144,9 +144,6 @@ public class GraphQLDataFetchers {
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
-                System.out.println(document);
-                System.out.println("UID: " + document.getId());
-                System.out.println("Name: " + document.getString("name"));
                 friendsList = Arrays.asList((ImmutableMap.of(
                         "uid", document.getId(),
                         "name", document.getString("name")
@@ -154,8 +151,6 @@ public class GraphQLDataFetchers {
 //                if (document.contains("middle")) {
 //                    System.out.println("Middle: " + document.getString("middle"));
 //                }
-//                System.out.println("Last: " + document.getString("last"));
-//                System.out.println("Born: " + document.getLong("born"));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
