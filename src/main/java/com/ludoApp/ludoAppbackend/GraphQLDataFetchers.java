@@ -24,9 +24,19 @@ import java.util.concurrent.ExecutionException;
 public class GraphQLDataFetchers {
 
     private FileInputStream serviceAccount;
+    FirebaseOptions options;
+    Firestore db;
 
-    GraphQLDataFetchers() throws FileNotFoundException {
+    GraphQLDataFetchers() throws IOException {
         this.serviceAccount = new FileInputStream("firebase_connection.json");
+
+        this.options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(this.serviceAccount))
+                .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
+                .build();
+
+        FirebaseApp.initializeApp(options);
+        this.db = FirestoreClient.getFirestore();
     }
 
     private static List<Map<String, String>> books = Arrays.asList(
@@ -128,18 +138,8 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher getFriendsDataFetcher() {
-        FirebaseOptions options;
         try {
-            options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(this.serviceAccount))
-                    .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
-                    .build();
-
-            FirebaseApp.initializeApp(options);
-            Firestore db = FirestoreClient.getFirestore();
-
-
-            ApiFuture<QuerySnapshot> query = db.collection("usersInfo").get();
+            ApiFuture<QuerySnapshot> query = this.db.collection("usersInfo").get();
 
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
@@ -157,10 +157,6 @@ public class GraphQLDataFetchers {
 //                System.out.println("Last: " + document.getString("last"));
 //                System.out.println("Born: " + document.getLong("born"));
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
