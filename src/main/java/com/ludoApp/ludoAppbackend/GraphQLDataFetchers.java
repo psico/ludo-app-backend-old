@@ -147,10 +147,10 @@ public class GraphQLDataFetchers {
                 System.out.println(document);
                 System.out.println("UID: " + document.getId());
                 System.out.println("Name: " + document.getString("name"));
-                friendsList.add(ImmutableMap.of(
+                friendsList = Arrays.asList((ImmutableMap.of(
                         "uid", document.getId(),
                         "name", document.getString("name")
-                ));
+                )));
 //                if (document.contains("middle")) {
 //                    System.out.println("Middle: " + document.getString("middle"));
 //                }
