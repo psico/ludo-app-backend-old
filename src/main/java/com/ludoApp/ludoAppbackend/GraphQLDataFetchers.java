@@ -23,6 +23,12 @@ import java.util.concurrent.ExecutionException;
 @Component
 public class GraphQLDataFetchers {
 
+    private FileInputStream serviceAccount;
+
+    GraphQLDataFetchers() throws FileNotFoundException {
+        this.serviceAccount = new FileInputStream("firebase_connection.json");
+    }
+
     private static List<Map<String, String>> books = Arrays.asList(
             ImmutableMap.of("id", "book-1",
                     "name", "Harry Potter and the Philosopher's Stone",
@@ -123,10 +129,9 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getFriendsDataFetcher() {
         FirebaseOptions options;
-        try (FileInputStream serviceAccount = new FileInputStream("firebase_connection.json")) {
-
+        try {
             options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(this.serviceAccount))
                     .setDatabaseUrl("https://ludoapp-b612.firebaseio.com")
                     .build();
 
