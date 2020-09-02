@@ -107,7 +107,7 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getAuthorDataFetcher() {
         return dataFetchingEnvironment -> {
-            Map<String,String> book = dataFetchingEnvironment.getSource();
+            Map<String, String> book = dataFetchingEnvironment.getSource();
             String authorId = book.get("authorId");
             return authors
                     .stream()
@@ -121,7 +121,7 @@ public class GraphQLDataFetchers {
     // Implement the DataFetcher
     public DataFetcher getPageCountDataFetcher() {
         return dataFetchingEnvironment -> {
-            Map<String,String> book = dataFetchingEnvironment.getSource();
+            Map<String, String> book = dataFetchingEnvironment.getSource();
             return book.get("totalPages");
         };
     }
@@ -144,10 +144,20 @@ public class GraphQLDataFetchers {
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
-                friendsList = Arrays.asList((ImmutableMap.of(
-                        "uid", document.getId(),
-                        "name", document.getString("name")
-                )));
+                friendsList = Arrays.asList(
+                        new ImmutableMap[]{(
+                                ImmutableMap.of(
+                                        "uid", document.getId(),
+                                        "name", document.getString("name"),
+                                        "friends", Arrays.asList(
+                                                ImmutableMap.of(
+                                                        "name", "teste 5",
+                                                        "uid", "39K3LW8i3BU7e9yatuoSfFuAkAc2"
+                                                )
+                                        )
+                                )
+                        )}
+                );
 //                if (document.contains("middle")) {
 //                    System.out.println("Middle: " + document.getString("middle"));
 //                }
