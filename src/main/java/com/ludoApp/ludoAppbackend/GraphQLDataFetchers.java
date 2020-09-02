@@ -68,7 +68,7 @@ public class GraphQLDataFetchers {
 
     private static List<Map<String, Object>> userInfo = Arrays.asList(
             ImmutableMap.of("uid", "9gwyi7B6PHBr0RDuSHwS",
-                    "name", "Teste 6",
+                    "name", "Teste333 6",
                     "friends", Arrays.asList(
                             ImmutableMap.of(
                                     "name", "teste 5",
@@ -76,7 +76,7 @@ public class GraphQLDataFetchers {
                             )
                     )),
             ImmutableMap.of("uid", "wAoGIkyZ1L50Kba9CAlf",
-                    "name", "Desenvolvedor JG",
+                    "name", "Desenvolvedoras JG",
                     "friends", Arrays.asList(
                             ImmutableMap.of(
                                     "name", "teste 5",
