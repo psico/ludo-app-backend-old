@@ -70,15 +70,16 @@ public class GraphQLProvider {
                 .type(TypeRuntimeWiring.newTypeWiring("Query")
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
                         .dataFetcher("userInfoId", graphQLDataFetchers.getUserInfoById())
+                        .dataFetcher("usersInfo", graphQLDataFetchers.getFriendsDataFetcher())
                 )
                 .type(TypeRuntimeWiring.newTypeWiring("Book")
                         .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
                         // This line is new: we need to register the additional DataFetcher
                         .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher())
                 )
-                .type(TypeRuntimeWiring.newTypeWiring("UserInfo")
-                        .dataFetcher("friends", graphQLDataFetchers.getFriendsDataFetcher())
-                )
+//                .type(TypeRuntimeWiring.newTypeWiring("UserInfo")
+//                        .dataFetcher("friends", graphQLDataFetchers.getFriendsDataFetcher())
+//                )
                 .build();
     }
 }
