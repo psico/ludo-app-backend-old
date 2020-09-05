@@ -1,7 +1,5 @@
 package com.ludoApp.ludoAppbackend.models;
 
-import com.ludoApp.ludoAppbackend.models.Friend;
-
 import java.util.List;
 
 public class UserInfo {
