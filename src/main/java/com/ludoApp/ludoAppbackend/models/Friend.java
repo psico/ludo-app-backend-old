@@ -1,4 +1,4 @@
-package com.ludoApp.ludoAppbackend;
+package com.ludoApp.ludoAppbackend.models;
 
 public class Friend {
 
