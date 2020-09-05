@@ -1,4 +1,6 @@
-package com.ludoApp.ludoAppbackend;
+package com.ludoApp.ludoAppbackend.models;
+
+import com.ludoApp.ludoAppbackend.models.Friend;
 
 import java.util.List;
 
