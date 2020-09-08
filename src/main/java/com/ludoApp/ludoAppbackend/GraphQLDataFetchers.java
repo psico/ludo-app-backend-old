@@ -144,17 +144,13 @@ public class GraphQLDataFetchers {
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
+                System.out.println(document.get("friends"));
                 friendsList = Arrays.asList(
                         new ImmutableMap[]{(
                                 ImmutableMap.of(
                                         "uid", document.getId(),
                                         "name", document.getString("name"),
-                                        "friends", Arrays.asList(
-                                                ImmutableMap.of(
-                                                        "name", "teste 5",
-                                                        "uid", "39K3LW8i3BU7e9yatuoSfFuAkAc2"
-                                                )
-                                        )
+                                        "friends", document.get("friends")
                                 )
                         )}
                 );
