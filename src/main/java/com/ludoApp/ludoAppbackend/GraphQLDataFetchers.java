@@ -13,7 +13,6 @@ import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -84,13 +83,6 @@ public class GraphQLDataFetchers {
                             )
                     ))
     );
-
-//    private static List<Map<String, String>> friendsList = Arrays.asList(
-//            ImmutableMap.of("uid", "0IhNFZFa7QMwBY6yZT8l24L1AX32",
-//                    "name", "Desenvolvedor JG"),
-//            ImmutableMap.of("uid", "MHIMaAOuYZY9RCmQxP4CckIcpQi2",
-//                    "name", "MailparaJG")
-//    );
 
     private static List<Map<String, String>> friendsList;
 
