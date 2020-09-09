@@ -1,16 +1,7 @@
 package com.ludoApp.ludoAppbackend;
 
-import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
-import com.google.firebase.database.*;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.*;
@@ -19,12 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 @Component
 public class GraphQLProvider {
@@ -55,17 +42,6 @@ public class GraphQLProvider {
     }
 
     private RuntimeWiring buildWiring() {
-
-
-
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.getApplicationDefault())
-//                .setDatabaseUrl("https://ludoapp-b612.firebaseio.com/")
-//                .build();
-//
-//        FirebaseApp.initializeApp(options);
-
-
         return RuntimeWiring.newRuntimeWiring()
                 .type(TypeRuntimeWiring.newTypeWiring("Query")
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
@@ -77,9 +53,6 @@ public class GraphQLProvider {
                         // This line is new: we need to register the additional DataFetcher
                         .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher())
                 )
-//                .type(TypeRuntimeWiring.newTypeWiring("UserInfo")
-//                        .dataFetcher("friends", graphQLDataFetchers.getFriendsDataFetcher())
-//                )
                 .build();
     }
 }
