@@ -2,6 +2,7 @@ type Query {
     bookById(id: ID): Book
     userInfoId(id: String): UserInfo
     usersInfo: [UserInfo]
+    matches: [Match]
 }
 
 type Book {
@@ -26,4 +27,9 @@ type UserInfo {
     uid: ID
     name: String
     friends:[Friend!]!
+}
+
+type Match {
+    uid: ID
+    gameMoment: String
 }
