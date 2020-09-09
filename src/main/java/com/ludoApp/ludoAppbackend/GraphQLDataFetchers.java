@@ -85,6 +85,7 @@ public class GraphQLDataFetchers {
     );
 
     private static List<Map<String, String>> friendsList;
+    private static List<Map<String, String>> matchesList;
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
@@ -160,6 +161,35 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> {
 //            Map<String,String> userInfo = dataFetchingEnvironment.getSource();
             return friendsList;
+        };
+    }
+
+    public DataFetcher getMatchesFetcher() {
+        try {
+            ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
+
+            QuerySnapshot querySnapshot = query.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                System.out.println(document.get("matches"));
+                matchesList = Arrays.asList(
+                        new ImmutableMap[]{(
+                                ImmutableMap.of(
+                                        "uid", document.getId(),
+                                        "gameMoment", document.getString("gameMoment")
+                                )
+                        )}
+                );
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        return dataFetchingEnvironment -> {
+            return matchesList;
         };
     }
 
