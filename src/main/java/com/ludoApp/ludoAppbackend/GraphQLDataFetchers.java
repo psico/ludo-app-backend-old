@@ -171,7 +171,7 @@ public class GraphQLDataFetchers {
             QuerySnapshot querySnapshot = query.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
-                System.out.println(document.get("matches"));
+                System.out.println(document.get("gameMoment"));
                 matchesList = Arrays.asList(
                         new ImmutableMap[]{(
                                 ImmutableMap.of(
