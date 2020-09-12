@@ -176,7 +176,8 @@ public class GraphQLDataFetchers {
                         new ImmutableMap[]{(
                                 ImmutableMap.of(
                                         "uid", document.getId(),
-                                        "gameMoment", document.getString("gameMoment")
+                                        "gameMoment", document.getString("gameMoment"),
+                                        "players", document.get("players")
                                 )
                         )}
                 );
