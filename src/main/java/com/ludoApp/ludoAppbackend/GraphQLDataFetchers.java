@@ -9,12 +9,15 @@ import com.google.common.collect.ImmutableMap;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.protobuf.Any;
 import graphql.schema.DataFetcher;
+import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -138,15 +141,15 @@ public class GraphQLDataFetchers {
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
                 System.out.println(document.get("friends"));
-                friendsList = Arrays.asList(
-                        new ImmutableMap[]{(
-                                ImmutableMap.of(
-                                        "uid", document.getId(),
-                                        "name", document.getString("name"),
-                                        "friends", document.get("friends")
-                                )
-                        )}
-                );
+//                friendsList = Arrays.asList(
+//                        new ImmutableMap[]{(
+//                                ImmutableMap.of(
+//                                        "uid", document.getId(),
+//                                        "name", document.getString("name"),
+//                                        "friends", document.get("friends")
+//                                )
+//                        )}
+//                );
 //                if (document.contains("middle")) {
 //                    System.out.println("Middle: " + document.getString("middle"));
 //                }
@@ -172,15 +175,18 @@ public class GraphQLDataFetchers {
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
             for (QueryDocumentSnapshot document : documents) {
                 System.out.println(document.get("gameMoment"));
-                matchesList = Arrays.asList(
-                        new ImmutableMap[]{(
-                                ImmutableMap.of(
-                                        "uid", document.getId(),
-                                        "gameMoment", document.getString("gameMoment"),
-                                        "players", document.get("players")
-                                )
-                        )}
-                );
+//                matchesList = Arrays.asList(
+//                        new ImmutableMap[]{(
+//                                ImmutableMap.of(
+//                                        "uid", document.getId(),
+//                                        "gameMoment", document.getString("gameMoment"),
+//                                        "players", document.get("players")
+//                                )
+//                        )}
+//                );
+//                Map<String, String> td = (HashMap<String,String>) document.getData();
+//                matchesList.add(td);
+
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
