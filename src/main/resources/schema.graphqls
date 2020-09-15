@@ -2,6 +2,7 @@ type Query {
     bookById(id: ID): Book
     userInfoId(id: String): UserInfo
     usersInfo: [UserInfo]
+    matchByID(id: ID): Match
     matches: [Match]
 }
 
