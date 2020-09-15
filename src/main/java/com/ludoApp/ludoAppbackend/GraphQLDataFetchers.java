@@ -167,6 +167,17 @@ public class GraphQLDataFetchers {
         };
     }
 
+    public DataFetcher getMatchByID() {
+        return dataFetchingEnvironment -> {
+            String matchUid = dataFetchingEnvironment.getArgument("id");
+            return matchesList
+                    .stream()
+                    .filter(matchesList -> matchesList.get("uid").equals(matchUid))
+                    .findFirst()
+                    .orElse(null);
+        };
+    }
+
     public DataFetcher getMatchesFetcher() {
         try {
             ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
