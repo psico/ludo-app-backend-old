@@ -47,13 +47,14 @@ public class GraphQLProvider {
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
                         .dataFetcher("userInfoId", graphQLDataFetchers.getUserInfoById())
                         .dataFetcher("usersInfo", graphQLDataFetchers.getFriendsDataFetcher())
+                        .dataFetcher("matchByID", graphQLDataFetchers.getMatchByID())
                         .dataFetcher("matches", graphQLDataFetchers.getMatchesFetcher())
                 )
-                .type(TypeRuntimeWiring.newTypeWiring("Book")
-                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
-                        // This line is new: we need to register the additional DataFetcher
-                        .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher())
-                )
+//                .type(TypeRuntimeWiring.newTypeWiring("Book")
+//                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
+//                        // This line is new: we need to register the additional DataFetcher
+//                        .dataFetcher("pageCount", graphQLDataFetchers.getPageCountDataFetcher())
+//                )
                 .build();
     }
 }
