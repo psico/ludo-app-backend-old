@@ -29,7 +29,9 @@ public class GraphQLDataFetchers {
     FirebaseOptions options;
     Firestore db;
 
-    GraphQLDataFetchers() throws IOException {
+    private List<Map<String, String>> matchesList;
+
+    GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
         this.serviceAccount = new FileInputStream("firebase_connection.json");
 
         this.options = new FirebaseOptions.Builder()
@@ -39,6 +41,12 @@ public class GraphQLDataFetchers {
 
         FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
+
+
+        ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
+
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> this.matchesList = querySnapshot.toObjects(Map.class<String, String>);
     }
 
     private static List<Map<String, String>> books = Arrays.asList(
@@ -88,7 +96,7 @@ public class GraphQLDataFetchers {
     );
 
     private static List<Map<String, String>> friendsList;
-    private static List<Map<String, String>> matchesList;
+//    private static List<Map<String, String>> matchesList;
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
@@ -177,7 +185,7 @@ public class GraphQLDataFetchers {
             String matchUid = dataFetchingEnvironment.getArgument("id");
             return documents
                     .stream()
-                    .filter(matchesList -> matchesList.get("uid").equals(matchUid))
+                    .filter(matchesList -> matchesList.getId().equals(matchUid))
                     .findFirst()
                     .orElse(null);
         };
