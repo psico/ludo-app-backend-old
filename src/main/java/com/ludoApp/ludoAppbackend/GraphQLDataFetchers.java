@@ -30,6 +30,7 @@ public class GraphQLDataFetchers {
     Firestore db;
 
     private List<Map<String, String>> matchesList;
+    private ApiFuture<QuerySnapshot> matchesCollection;
 
     GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
         this.serviceAccount = new FileInputStream("firebase_connection.json");
@@ -46,7 +47,8 @@ public class GraphQLDataFetchers {
         ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
 
         QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> this.matchesList = querySnapshot.toObjects(Map.class<String, String>);
+//        List<QueryDocumentSnapshot> lista = this.matchesList = querySnapshot.toObjects(Map.class<String, String>);
+        this.matchesCollection = this.db.collection("matches").get();
     }
 
     private static List<Map<String, String>> books = Arrays.asList(
