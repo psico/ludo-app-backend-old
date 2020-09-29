@@ -179,9 +179,7 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getMatchByID() {
         return dataFetchingEnvironment -> {
-            ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
-
-            QuerySnapshot querySnapshot = query.get();
+            QuerySnapshot querySnapshot = this.matchesCollection.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             String matchUid = dataFetchingEnvironment.getArgument("id");
