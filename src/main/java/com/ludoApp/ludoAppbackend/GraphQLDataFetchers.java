@@ -183,11 +183,13 @@ public class GraphQLDataFetchers {
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             String matchUid = dataFetchingEnvironment.getArgument("id");
+
             return documents
                     .stream()
-                    .filter(matchesList -> matchesList.getId().equals(matchUid))
+                    .filter(match -> match.getId().equals(matchUid))
                     .findFirst()
-                    .orElse(null);
+                    .orElse(null)
+                    .getData();
         };
     }
 
