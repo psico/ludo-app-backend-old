@@ -34,4 +34,11 @@ type Match {
     uid: ID
     gameMoment: String
     players: [Friend!]
+    game: Game
+}
+
+type Game {
+    name: String
+    objectId: String
+    yearPublished: String
 }
