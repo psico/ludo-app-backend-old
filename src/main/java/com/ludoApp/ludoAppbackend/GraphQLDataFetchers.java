@@ -9,15 +9,12 @@ import com.google.common.collect.ImmutableMap;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.protobuf.Any;
 import graphql.schema.DataFetcher;
-import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -43,11 +40,6 @@ public class GraphQLDataFetchers {
         FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
 
-
-        ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
-
-        QuerySnapshot querySnapshot = query.get();
-//        List<QueryDocumentSnapshot> lista = this.matchesList = querySnapshot.toObjects(Map.class<String, String>);
         this.matchesCollection = this.db.collection("matches").get();
     }
 
@@ -98,7 +90,6 @@ public class GraphQLDataFetchers {
     );
 
     private static List<Map<String, String>> friendsList;
-//    private static List<Map<String, String>> matchesList;
 
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
@@ -199,7 +190,7 @@ public class GraphQLDataFetchers {
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             for (QueryDocumentSnapshot document : documents) {
-//                System.out.println(document.get("gameMoment"));
+                System.out.println(document.get("gameMoment"));
 //                matchesList = Arrays.asList(
 //                        new ImmutableMap[]{(
 //                                ImmutableMap.of(
