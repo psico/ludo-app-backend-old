@@ -195,10 +195,9 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getMatchesFetcher() {
         try {
-            ApiFuture<QuerySnapshot> query = this.db.collection("matches").get();
-
-            QuerySnapshot querySnapshot = query.get();
+            QuerySnapshot querySnapshot = this.matchesCollection.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
             for (QueryDocumentSnapshot document : documents) {
 //                System.out.println(document.get("gameMoment"));
 //                matchesList = Arrays.asList(
