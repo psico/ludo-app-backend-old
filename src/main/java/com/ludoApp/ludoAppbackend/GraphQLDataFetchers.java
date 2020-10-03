@@ -195,7 +195,9 @@ public class GraphQLDataFetchers {
 
             for (QueryDocumentSnapshot document : documents) {
 //                List<Map<String, Object>> userInfo
-                Map<Integer, String> match = new HashMap<>();
+                Map<String, String> match = new HashMap<>();
+                match.put("gameMoment", document.getString("gameMoment"));
+                match.put("uid", document.getString("uid"));
 //                userInfo
 //                authors
                 System.out.println(document.get("gameMoment"));
