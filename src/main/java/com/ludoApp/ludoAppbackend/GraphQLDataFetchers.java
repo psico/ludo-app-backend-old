@@ -14,10 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @Component
@@ -186,12 +183,11 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher getMatchesFetcher() {
+        List<Map<String, String>> result = new ArrayList<>();
+
         try {
             QuerySnapshot querySnapshot = this.matchesCollection.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-
-//            List<Map<String, String>> result;
-
 
             for (QueryDocumentSnapshot document : documents) {
 //                List<Map<String, Object>> userInfo
@@ -200,7 +196,7 @@ public class GraphQLDataFetchers {
                 match.put("uid", document.getString("uid"));
 //                userInfo
 //                authors
-                System.out.println(document.get("gameMoment"));
+//                System.out.println(document.get("gameMoment"));
 //                matchesList = Arrays.asList(
 //                        new ImmutableMap[]{(
 //                                ImmutableMap.of(
@@ -212,18 +208,19 @@ public class GraphQLDataFetchers {
 //                );
 //                Map<String, String> td = (HashMap<String,String>) document.getData();
 //                matchesList.add(td);
+                result.add(match);
 
             }
+//            return result.stream();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+//        matchesList
+//        result
 
-
-        return dataFetchingEnvironment -> {
-            return matchesList;
-        };
+        return dataFetchingEnvironment -> result;
     }
 
 }
