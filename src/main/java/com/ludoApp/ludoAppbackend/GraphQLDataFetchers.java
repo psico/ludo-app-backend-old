@@ -190,35 +190,18 @@ public class GraphQLDataFetchers {
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             for (QueryDocumentSnapshot document : documents) {
-//                List<Map<String, Object>> userInfo
                 Map<String, String> match = new HashMap<>();
+
                 match.put("gameMoment", document.getString("gameMoment"));
                 match.put("uid", document.getString("uid"));
-//                userInfo
-//                authors
-//                System.out.println(document.get("gameMoment"));
-//                matchesList = Arrays.asList(
-//                        new ImmutableMap[]{(
-//                                ImmutableMap.of(
-//                                        "uid", document.getId(),
-//                                        "gameMoment", document.getString("gameMoment"),
-//                                        "players", document.get("players")
-//                                )
-//                        )}
-//                );
-//                Map<String, String> td = (HashMap<String,String>) document.getData();
-//                matchesList.add(td);
-                result.add(match);
 
+                result.add(match);
             }
-//            return result.stream();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-//        matchesList
-//        result
 
         return dataFetchingEnvironment -> result;
     }
