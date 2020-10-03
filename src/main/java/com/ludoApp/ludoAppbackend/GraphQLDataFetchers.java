@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -189,7 +190,14 @@ public class GraphQLDataFetchers {
             QuerySnapshot querySnapshot = this.matchesCollection.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
+//            List<Map<String, String>> result;
+
+
             for (QueryDocumentSnapshot document : documents) {
+//                List<Map<String, Object>> userInfo
+                Map<Integer, String> match = new HashMap<>();
+//                userInfo
+//                authors
                 System.out.println(document.get("gameMoment"));
 //                matchesList = Arrays.asList(
 //                        new ImmutableMap[]{(
