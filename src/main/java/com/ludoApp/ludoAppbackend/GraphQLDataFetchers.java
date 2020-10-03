@@ -183,15 +183,16 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher getMatchesFetcher() {
-        List<Map<String, String>> result = new ArrayList<>();
+        List<Map<String, Object>> result = new ArrayList<>();
 
         try {
             QuerySnapshot querySnapshot = this.matchesCollection.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             for (QueryDocumentSnapshot document : documents) {
-                Map<String, String> match = new HashMap<>();
+                Map<String, Object> match = new HashMap<>();
 
+                match.put("game", document.get("game"));
                 match.put("gameMoment", document.getString("gameMoment"));
                 match.put("uid", document.getString("uid"));
 
