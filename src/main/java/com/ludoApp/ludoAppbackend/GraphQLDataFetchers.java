@@ -24,6 +24,7 @@ public class GraphQLDataFetchers {
     FirebaseOptions options;
     Firestore db;
 
+    private ApiFuture<QuerySnapshot> usersInfoCollection;
     private ApiFuture<QuerySnapshot> matchesCollection;
 
     GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
@@ -37,6 +38,7 @@ public class GraphQLDataFetchers {
         FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
 
+        this.usersInfoCollection = this.db.collection("usersInfo").get();
         this.matchesCollection = this.db.collection("matches").get();
     }
 
