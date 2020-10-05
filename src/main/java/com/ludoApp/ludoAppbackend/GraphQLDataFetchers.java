@@ -24,7 +24,6 @@ public class GraphQLDataFetchers {
     FirebaseOptions options;
     Firestore db;
 
-    private List<Map<String, String>> matchesList;
     private ApiFuture<QuerySnapshot> matchesCollection;
 
     GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
@@ -87,8 +86,6 @@ public class GraphQLDataFetchers {
                     ))
     );
 
-    private static List<Map<String, String>> friendsList;
-
     public DataFetcher getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
             String bookId = dataFetchingEnvironment.getArgument("id");
@@ -129,40 +126,6 @@ public class GraphQLDataFetchers {
                     .filter(userInfo -> userInfo.get("uid").equals(userUid))
                     .findFirst()
                     .orElse(null);
-        };
-    }
-
-    public DataFetcher getFriendsDataFetcher() {
-        try {
-            ApiFuture<QuerySnapshot> query = this.db.collection("usersInfo").get();
-
-            QuerySnapshot querySnapshot = query.get();
-            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-            for (QueryDocumentSnapshot document : documents) {
-//                System.out.println(document.get("friends"));
-//                friendsList = Arrays.asList(
-//                        new ImmutableMap[]{(
-//                                ImmutableMap.of(
-//                                        "uid", document.getId(),
-//                                        "name", document.getString("name"),
-//                                        "friends", document.get("friends")
-//                                )
-//                        )}
-//                );
-//                if (document.contains("middle")) {
-//                    System.out.println("Middle: " + document.getString("middle"));
-//                }
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-
-        return dataFetchingEnvironment -> {
-//            Map<String,String> userInfo = dataFetchingEnvironment.getSource();
-            return friendsList;
         };
     }
 
