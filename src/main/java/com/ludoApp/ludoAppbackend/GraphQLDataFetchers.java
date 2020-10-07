@@ -137,25 +137,20 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher getFriendsDataFetcher() {
-        try {
-            ApiFuture<QuerySnapshot> query = this.db.collection("usersInfo").get();
+        List<Map<String, Object>> result = new ArrayList<>();
 
-            QuerySnapshot querySnapshot = query.get();
+        try {
+            QuerySnapshot querySnapshot = this.usersInfoCollection.get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
             for (QueryDocumentSnapshot document : documents) {
-//                System.out.println(document.get("friends"));
-//                friendsList = Arrays.asList(
-//                        new ImmutableMap[]{(
-//                                ImmutableMap.of(
-//                                        "uid", document.getId(),
-//                                        "name", document.getString("name"),
-//                                        "friends", document.get("friends")
-//                                )
-//                        )}
-//                );
-//                if (document.contains("middle")) {
-//                    System.out.println("Middle: " + document.getString("middle"));
-//                }
+                Map<String, Object> userInfo = new HashMap<>();
+
+                userInfo.put("friends", document.get("friends"));
+                userInfo.put("gameMoment", document.getString("name"));
+                userInfo.put("uid", document.getString("uid"));
+
+                result.add(userInfo);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -163,11 +158,7 @@ public class GraphQLDataFetchers {
             e.printStackTrace();
         }
 
-
-        return dataFetchingEnvironment -> {
-//            Map<String,String> userInfo = dataFetchingEnvironment.getSource();
-            return friendsList;
-        };
+        return dataFetchingEnvironment -> result;
     }
 
     public DataFetcher getMatchByID() {
