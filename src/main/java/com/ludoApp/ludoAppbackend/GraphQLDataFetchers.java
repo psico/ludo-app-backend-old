@@ -136,6 +136,40 @@ public class GraphQLDataFetchers {
         };
     }
 
+    public DataFetcher getFriendsDataFetcher() {
+        try {
+            ApiFuture<QuerySnapshot> query = this.db.collection("usersInfo").get();
+
+            QuerySnapshot querySnapshot = query.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+//                System.out.println(document.get("friends"));
+//                friendsList = Arrays.asList(
+//                        new ImmutableMap[]{(
+//                                ImmutableMap.of(
+//                                        "uid", document.getId(),
+//                                        "name", document.getString("name"),
+//                                        "friends", document.get("friends")
+//                                )
+//                        )}
+//                );
+//                if (document.contains("middle")) {
+//                    System.out.println("Middle: " + document.getString("middle"));
+//                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        return dataFetchingEnvironment -> {
+//            Map<String,String> userInfo = dataFetchingEnvironment.getSource();
+            return friendsList;
+        };
+    }
+
     public DataFetcher getMatchByID() {
         return dataFetchingEnvironment -> {
             QuerySnapshot querySnapshot = this.matchesCollection.get();
