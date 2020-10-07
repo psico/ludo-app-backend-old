@@ -147,7 +147,7 @@ public class GraphQLDataFetchers {
                 Map<String, Object> userInfo = new HashMap<>();
 
                 userInfo.put("friends", document.get("friends"));
-                userInfo.put("gameMoment", document.getString("name"));
+                userInfo.put("name", document.getString("name"));
                 userInfo.put("uid", document.getString("uid"));
 
                 result.add(userInfo);
