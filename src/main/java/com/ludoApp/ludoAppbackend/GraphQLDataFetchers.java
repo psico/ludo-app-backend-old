@@ -122,12 +122,17 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getUserInfoById() {
         return dataFetchingEnvironment -> {
+            QuerySnapshot querySnapshot = this.usersInfoCollection.get();
+            List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
             String userUid = dataFetchingEnvironment.getArgument("id");
-            return userInfo
+
+            return documents
                     .stream()
                     .filter(userInfo -> userInfo.get("uid").equals(userUid))
                     .findFirst()
-                    .orElse(null);
+                    .orElse(null)
+                    .getData();
         };
     }
 
