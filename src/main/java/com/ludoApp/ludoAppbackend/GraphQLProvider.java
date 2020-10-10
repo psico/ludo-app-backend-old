@@ -49,6 +49,7 @@ public class GraphQLProvider {
                         .dataFetcher("usersInfo", graphQLDataFetchers.getFriendsDataFetcher())
                         .dataFetcher("matchByID", graphQLDataFetchers.getMatchByID())
                         .dataFetcher("matches", graphQLDataFetchers.getMatchesFetcher())
+                        .dataFetchers("createMatch", graphQLDataFetchers.setMatchFetcher())
                 )
 //                .type(TypeRuntimeWiring.newTypeWiring("Book")
 //                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher())
