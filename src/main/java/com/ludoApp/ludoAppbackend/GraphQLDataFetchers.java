@@ -203,4 +203,8 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> result;
     }
 
+    public DataFetcher setMatchFetcher() {
+
+    }
+
 }
