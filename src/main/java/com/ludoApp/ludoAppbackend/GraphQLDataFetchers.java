@@ -203,8 +203,12 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> result;
     }
 
-//    public DataFetcher setMatchFetcher() {
-//
-//    }
+    public DataFetcher createMatchFetcher() {
+        return dataFetchingEnvironment -> books
+                .stream()
+                .filter(book -> book.get("id").equals("book-1"))
+                .findFirst()
+                .orElse(null);
+    }
 
 }
