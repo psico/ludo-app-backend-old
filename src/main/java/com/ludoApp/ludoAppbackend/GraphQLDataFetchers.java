@@ -136,7 +136,7 @@ public class GraphQLDataFetchers {
         };
     }
 
-    public DataFetcher getFriendsDataFetcher() {
+    public DataFetcher getUsersInfoFetcher() {
         List<Map<String, Object>> result = new ArrayList<>();
 
         try {
@@ -203,8 +203,8 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> result;
     }
 
-    public DataFetcher setMatchFetcher() {
-
-    }
+//    public DataFetcher setMatchFetcher() {
+//
+//    }
 
 }
