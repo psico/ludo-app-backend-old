@@ -7,7 +7,7 @@ type Query {
 }
 
 type Mutation {
-    createMatch(uid: String, gameMoment: String): UserInfo
+    createMatch(uid: String, gameMoment: String): Match
 }
 
 type Book {
