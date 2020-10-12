@@ -204,11 +204,17 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher createMatchFetcher() {
-        return dataFetchingEnvironment -> books
-                .stream()
-                .filter(book -> book.get("id").equals("book-1"))
-                .findFirst()
-                .orElse(null);
+        System.out.println("chamou aki");
+        return dataFetchingEnvironment -> {
+            Map<String, Object> args = dataFetchingEnvironment.getArguments();
+            System.out.println(args);
+
+            return books
+                    .stream()
+                    .filter(book -> book.get("id").equals("book-1"))
+                    .findFirst()
+                    .orElse(null);
+        };
     }
 
 }
