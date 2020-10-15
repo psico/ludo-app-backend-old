@@ -26,7 +26,7 @@ public class GraphQLDataFetchers {
     Firestore db;
 
     private CollectionReference usersInfoCollection;
-    private ApiFuture<QuerySnapshot> matchesCollection;
+    private CollectionReference matchesCollection;
 
     GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
         this.serviceAccount = new FileInputStream("firebase_connection.json");
@@ -40,7 +40,7 @@ public class GraphQLDataFetchers {
         this.db = FirestoreClient.getFirestore();
 
         this.usersInfoCollection = this.db.collection("usersInfo");
-        this.matchesCollection = this.db.collection("matches").get();
+        this.matchesCollection = this.db.collection("matches");
     }
 
     private static List<Map<String, String>> books = Arrays.asList(
@@ -164,7 +164,7 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getMatchByID() {
         return dataFetchingEnvironment -> {
-            QuerySnapshot querySnapshot = this.matchesCollection.get();
+            QuerySnapshot querySnapshot = this.matchesCollection.get().get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             String matchUid = dataFetchingEnvironment.getArgument("id");
@@ -182,7 +182,7 @@ public class GraphQLDataFetchers {
         List<Map<String, Object>> result = new ArrayList<>();
 
         try {
-            QuerySnapshot querySnapshot = this.matchesCollection.get();
+            QuerySnapshot querySnapshot = this.matchesCollection.get().get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             for (QueryDocumentSnapshot document : documents) {
