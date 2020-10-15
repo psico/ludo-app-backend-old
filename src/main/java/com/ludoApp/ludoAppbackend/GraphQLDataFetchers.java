@@ -2,6 +2,7 @@ package com.ludoApp.ludoAppbackend;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -24,7 +25,7 @@ public class GraphQLDataFetchers {
     FirebaseOptions options;
     Firestore db;
 
-    private ApiFuture<QuerySnapshot> usersInfoCollection;
+    private CollectionReference usersInfoCollection;
     private ApiFuture<QuerySnapshot> matchesCollection;
 
     GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
@@ -38,7 +39,7 @@ public class GraphQLDataFetchers {
         FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
 
-        this.usersInfoCollection = this.db.collection("usersInfo").get();
+        this.usersInfoCollection = this.db.collection("usersInfo");
         this.matchesCollection = this.db.collection("matches").get();
     }
 
@@ -122,7 +123,7 @@ public class GraphQLDataFetchers {
 
     public DataFetcher getUserInfoById() {
         return dataFetchingEnvironment -> {
-            QuerySnapshot querySnapshot = this.usersInfoCollection.get();
+            QuerySnapshot querySnapshot = this.usersInfoCollection.get().get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             String userUid = dataFetchingEnvironment.getArgument("id");
@@ -140,7 +141,7 @@ public class GraphQLDataFetchers {
         List<Map<String, Object>> result = new ArrayList<>();
 
         try {
-            QuerySnapshot querySnapshot = this.usersInfoCollection.get();
+            QuerySnapshot querySnapshot = this.usersInfoCollection.get().get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             for (QueryDocumentSnapshot document : documents) {
@@ -206,6 +207,7 @@ public class GraphQLDataFetchers {
     public DataFetcher createMatchFetcher() {
         System.out.println("chamou aki");
         return dataFetchingEnvironment -> {
+//            this.matchesCollection.do
             Map<String, Object> args = dataFetchingEnvironment.getArguments();
             System.out.println(args);
 
