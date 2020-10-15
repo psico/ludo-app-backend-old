@@ -207,7 +207,13 @@ public class GraphQLDataFetchers {
     public DataFetcher createMatchFetcher() {
         System.out.println("chamou aki");
         return dataFetchingEnvironment -> {
-//            this.matchesCollection.do
+            Map<String, Object> docData = new HashMap<>();
+            docData.put("gameMoment", "teste");
+            docData.put("uid", "j14sp1oVjib0zW93pE3eBCGT4wx1");
+//            docData.put("country", "USA");
+//            docData.put("regions", Arrays.asList("west_coast", "socal"));
+
+            this.matchesCollection.document().set(docData);
             Map<String, Object> args = dataFetchingEnvironment.getArguments();
             System.out.println(args);
 
