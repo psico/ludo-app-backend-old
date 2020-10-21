@@ -43,10 +43,16 @@ type Match {
 
 input MatchInput {
     gameMoment: String
-    game: Game
+    game: GameInput
 }
 
 type Game {
+    name: String
+    objectId: String
+    yearPublished: String
+}
+
+input GameInput {
     name: String
     objectId: String
     yearPublished: String
