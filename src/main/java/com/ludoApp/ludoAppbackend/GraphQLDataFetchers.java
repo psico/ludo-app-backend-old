@@ -208,6 +208,7 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> {
             Map<String, Object> args = dataFetchingEnvironment.getArguments();
             System.out.println(args.values());
+            System.out.println(args.values().toArray()[0]);
 
             Map<String, Object> docData = new HashMap<>();
             docData.put("gameMoment", dataFetchingEnvironment.getArgument("gameMoment"));
