@@ -205,7 +205,6 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher createMatchFetcher() {
-        System.out.println("chamou aki");
         return dataFetchingEnvironment -> {
             Map<String, Object> args = dataFetchingEnvironment.getArguments();
             System.out.println(args.values());
