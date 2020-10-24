@@ -28,6 +28,11 @@ type Friend {
     name: String
 }
 
+input FriendInput {
+    uid: ID
+    name: String
+}
+
 type UserInfo {
     uid: ID
     name: String
@@ -44,6 +49,7 @@ type Match {
 input MatchInput {
     gameMoment: String
     game: GameInput
+    players: [FriendInput]
 }
 
 type Game {
