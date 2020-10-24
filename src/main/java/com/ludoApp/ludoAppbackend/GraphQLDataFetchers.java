@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -206,12 +207,20 @@ public class GraphQLDataFetchers {
     public DataFetcher createMatchFetcher() {
         return dataFetchingEnvironment -> {
             Map<String, Object> args = dataFetchingEnvironment.getArguments();
+            Collection<Object> values = args.values();
+            Object valuesLinked = args.values().toArray();
+//            HashMap<String,String> valuesLinked2 = valuesLinked[0];
+
             System.out.println(args.values());
             System.out.println(args.values().toArray()[0]);
 
             Map<String, Object> docData = new HashMap<>();
-            docData.put("gameMoment", dataFetchingEnvironment.getArgument("gameMoment"));
-            docData.put("uid", dataFetchingEnvironment.getArgument("uid"));
+//            docData.putAll(args.values().toArray()[0]);
+//            docData.put("gameMoment", args.values().toArray()[0].get("gameMoment"));
+
+//            docData.put("gameMoment", dataFetchingEnvironment.getArgument("gameMoment"));
+//            docData.put("uid", dataFetchingEnvironment.getArgument("uid"));
+//            docData.put("players", dataFetchingEnvironment.getArgument("players"));
 //            docData.put("country", "USA");
 //            docData.put("regions", Arrays.asList("west_coast", "socal"));
 
