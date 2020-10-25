@@ -229,7 +229,6 @@ public class GraphQLDataFetchers {
             docData.put("gameMoment", args.get("gameMoment"));
             docData.put("game", args.get("game"));
             docData.put("players", args.get("players"));
-//            docData.put("country", "USA");
 //            docData.put("regions", Arrays.asList("west_coast", "socal"));
 
             this.matchesCollection.document().set(docData);
