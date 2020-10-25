@@ -1,10 +1,8 @@
 package com.ludoApp.ludoAppbackend;
 
+import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import com.google.common.collect.ImmutableMap;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -14,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.WriteAbortedException;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -213,7 +212,8 @@ public class GraphQLDataFetchers {
             docData.put("game", args.get("game"));
             docData.put("players", args.get("players"));
 
-            this.matchesCollection.document().set(docData);
+            ApiFuture<WriteResult> result = this.matchesCollection.document().set(docData);
+            System.out.println(result);
 
             return books
                     .stream()
