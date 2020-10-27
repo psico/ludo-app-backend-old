@@ -212,8 +212,8 @@ public class GraphQLDataFetchers {
             docData.put("game", args.get("game"));
             docData.put("players", args.get("players"));
 
-            ApiFuture<WriteResult> result = this.matchesCollection.document().set(docData);
-            System.out.println(result);
+            WriteResult result = this.matchesCollection.document().set(docData).get();
+            System.out.println(result.getClass());
 
             return books
                     .stream()
