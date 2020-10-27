@@ -213,18 +213,12 @@ public class GraphQLDataFetchers {
             docData.put("players", args.get("players"));
 
             ApiFuture<WriteResult> result = this.matchesCollection.document().set(docData);
-            System.out.println(result.get().toString());
+            System.out.println(result.get());
             System.out.println(docData);
 
 //            this.matchesCollection.document().create(docData);
 
             return docData;
-
-//            return books
-//                    .stream()
-//                    .filter(book -> book.get("id").equals("book-1"))
-//                    .findFirst()
-//                    .orElse(null);
         };
     }
 
