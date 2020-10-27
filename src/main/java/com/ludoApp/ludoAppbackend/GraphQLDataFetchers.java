@@ -212,9 +212,10 @@ public class GraphQLDataFetchers {
             docData.put("game", args.get("game"));
             docData.put("players", args.get("players"));
 
-            ApiFuture<WriteResult> result = this.matchesCollection.document().set(docData);
+            DocumentReference docX = this.matchesCollection.document();
+            ApiFuture<WriteResult> result = docX.set(docData);
             System.out.println(result.get());
-            System.out.println(docData);
+            System.out.println(docX.getId());
 
 //            this.matchesCollection.document().create(docData);
 
