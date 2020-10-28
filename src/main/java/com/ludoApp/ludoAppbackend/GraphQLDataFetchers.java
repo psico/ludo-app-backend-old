@@ -208,14 +208,18 @@ public class GraphQLDataFetchers {
             Map<String,Object> args = dataFetchingEnvironment.getArgument("match");
             Map<String, Object> docData = new HashMap<>();
 
+            docData.put("docId", args.get("docId"));
+            docData.put("uid", args.get("uid"));
             docData.put("gameMoment", args.get("gameMoment"));
             docData.put("game", args.get("game"));
             docData.put("players", args.get("players"));
 
-            DocumentReference docX = this.matchesCollection.document();
-            ApiFuture<WriteResult> result = docX.set(docData);
+            DocumentReference docInput = this.matchesCollection.document();
+            docData.put("docId", docInput.getId());
+
+            ApiFuture<WriteResult> result = docInput.set(docData);
             System.out.println(result.get());
-            System.out.println(docX.getId());
+            System.out.println(docInput.getId());
 
 //            this.matchesCollection.document().create(docData);
 
