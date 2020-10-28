@@ -48,6 +48,7 @@ type Match {
 
 input MatchInput {
     docId: ID
+    uid: ID
     gameMoment: String
     game: GameInput
     players: [FriendInput]
