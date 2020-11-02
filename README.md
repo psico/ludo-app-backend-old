@@ -10,7 +10,7 @@
   </a>
 </p>
 <p align="center">
-    <img src="public/ludo512.png" alt="LudoApp Logo" />
+    <img src="ludo512.png" alt="LudoApp Logo" />
 </p>
 
 ## Developed by João Gabriel 
