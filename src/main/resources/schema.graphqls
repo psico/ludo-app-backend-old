@@ -1,5 +1,5 @@
 type Query {
-    bookById(id: ID): Book
+#    bookById(id: ID): Book
     userInfoById(id: String): UserInfo
     usersInfo: [UserInfo]
     matchByID(id: ID): Match
@@ -10,18 +10,18 @@ type Mutation {
     createMatch(match: MatchInput): Match
 }
 
-type Book {
-    id: ID
-    name: String
-    pageCount: Int
-    author: Author
-}
+#type Book {
+#    id: ID
+#    name: String
+#    pageCount: Int
+#    author: Author
+#}
 
-type Author {
-    id: ID
-    firstName: String
-    lastName: String
-}
+#type Author {
+#    id: ID
+#    firstName: String
+#    lastName: String
+#}
 
 type Friend {
     uid: ID
