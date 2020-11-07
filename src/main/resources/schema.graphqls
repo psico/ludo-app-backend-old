@@ -10,19 +10,6 @@ type Mutation {
     createMatch(match: MatchInput): Match
 }
 
-#type Book {
-#    id: ID
-#    name: String
-#    pageCount: Int
-#    author: Author
-#}
-
-#type Author {
-#    id: ID
-#    firstName: String
-#    lastName: String
-#}
-
 type Friend {
     uid: ID
     name: String
