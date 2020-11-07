@@ -32,6 +32,7 @@ type Match {
     gameMoment: String
     players: [Friend!]
     game: Game
+    comments: [Comment!]!
 }
 
 input MatchInput {
