@@ -53,3 +53,9 @@ input GameInput {
     objectId: String
     yearPublished: String
 }
+
+type Comment {
+    uid: ID
+    name: String
+    comment: String
+}
