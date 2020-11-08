@@ -139,4 +139,22 @@ public class GraphQLDataFetchers {
         };
     }
 
+    public DataFetcher createComment() {
+        return dataFetchingEnvironment -> {
+//            Map<String,Object> args = dataFetchingEnvironment.getArgument("match");
+            Map<String, Object> docData = new HashMap<>();
+
+//            docData.put("docId", args.get("docId"));
+//            docData.put("uid", args.get("uid"));
+//            docData.put("gameMoment", args.get("gameMoment"));
+//            docData.put("game", args.get("game"));
+//            docData.put("players", args.get("players"));
+//
+//            DocumentReference docInput = this.matchesCollection.document();
+//            docData.put("docId", docInput.getId());
+
+            return docData;
+        };
+    }
+
 }
