@@ -59,3 +59,9 @@ type Comment {
     name: String
     comment: String
 }
+
+input CommentInput {
+    uid: ID
+    matchId: ID
+    comment: String
+}
