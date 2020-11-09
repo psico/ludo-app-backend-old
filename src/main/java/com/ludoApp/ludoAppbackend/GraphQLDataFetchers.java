@@ -144,6 +144,9 @@ public class GraphQLDataFetchers {
             Map<String,Object> args = dataFetchingEnvironment.getArgument("comment");
             Map<String, Object> docData = new HashMap<>();
 
+            DocumentReference docRefMatch = this.matchesCollection.document(args.get("matchId").toString());
+            DocumentSnapshot docMatch = docRefMatch.get().get();
+
             docData.put("uid", args.get("uid"));
             docData.put("matchId", args.get("matchId"));
             docData.put("comment", args.get("comment"));
