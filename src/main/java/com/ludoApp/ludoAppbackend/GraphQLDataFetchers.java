@@ -144,12 +144,10 @@ public class GraphQLDataFetchers {
             Map<String,Object> args = dataFetchingEnvironment.getArgument("comment");
             Map<String, Object> docData = new HashMap<>();
 
-//            docData.put("docId", args.get("docId"));
-//            docData.put("uid", args.get("uid"));
-//            docData.put("gameMoment", args.get("gameMoment"));
-//            docData.put("game", args.get("game"));
-//            docData.put("players", args.get("players"));
-//
+            docData.put("uid", args.get("uid"));
+            docData.put("matchId", args.get("matchId"));
+            docData.put("comment", args.get("comment"));
+
 //            DocumentReference docInput = this.matchesCollection.document();
 //            docData.put("docId", docInput.getId());
 
