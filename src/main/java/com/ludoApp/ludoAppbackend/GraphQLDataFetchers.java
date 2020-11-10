@@ -150,10 +150,13 @@ public class GraphQLDataFetchers {
             DocumentReference docRefUser = this.usersInfoCollection.document(args.get("uid").toString());
             DocumentSnapshot docUser = docRefUser.get().get();
 
-            docRefUser.update("comments",listDocData);
-//            docData.put("uid", args.get("uid"));
-//            docData.put("matchId", args.get("matchId"));
-//            docData.put("comment", args.get("comment"));
+            Map<String, Object> docData = new HashMap<>();
+            docData.put("uid", docUser.get("uid"));
+            docData.put("name", docUser.get("name"));
+            docData.put("comment", args.get("comment"));
+
+            listDocData.add(docData);
+            docRefMatch.update("comments",listDocData);
 
 //            DocumentReference docInput = this.matchesCollection.document();
 //            docData.put("docId", docInput.getId());
