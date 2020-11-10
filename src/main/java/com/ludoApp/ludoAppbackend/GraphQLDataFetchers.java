@@ -160,8 +160,11 @@ public class GraphQLDataFetchers {
             docData.put("name", docUser.get().get("name"));
             docData.put("comment", args.get("comment"));
 
+            Object arrayList = docMatch.get("comments");
+            ((ArrayList) arrayList).add(docData);
+//            listDocData.add(docMatch.get("comments"));
             listDocData.add(docData);
-            docRefMatch.update("comments",listDocData);
+            docRefMatch.update("comments",arrayList);
 
 //            DocumentReference docInput = this.matchesCollection.document();
 //            docData.put("docId", docInput.getId());
