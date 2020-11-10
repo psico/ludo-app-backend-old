@@ -23,7 +23,7 @@ public class GraphQLDataFetchers {
     private CollectionReference usersInfoCollection;
     private CollectionReference matchesCollection;
 
-    GraphQLDataFetchers() throws IOException, ExecutionException, InterruptedException {
+    GraphQLDataFetchers() throws IOException {
         this.serviceAccount = new FileInputStream("firebase_connection.json");
 
         this.options = new FirebaseOptions.Builder()
