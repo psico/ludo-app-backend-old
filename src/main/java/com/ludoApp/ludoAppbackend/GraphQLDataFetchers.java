@@ -152,8 +152,6 @@ public class GraphQLDataFetchers {
                     .get().get()
                     .getDocuments().stream()
                     .findFirst();
-//            DocumentReference docRefUser = this.usersInfoCollection.document(args.get("uid").toString());
-//            DocumentSnapshot docUser = docRefUser.get().get();
 
             Map<String, Object> docData = new HashMap<>();
             docData.put("uid", docUser.get().get("uid"));
@@ -162,12 +160,9 @@ public class GraphQLDataFetchers {
 
             Object arrayList = docMatch.get("comments");
             ((ArrayList) arrayList).add(docData);
-//            listDocData.add(docMatch.get("comments"));
             listDocData.add(docData);
-            docRefMatch.update("comments",arrayList);
 
-//            DocumentReference docInput = this.matchesCollection.document();
-//            docData.put("docId", docInput.getId());
+            docRefMatch.update("comments",arrayList);
 
             return listDocData;
         };
