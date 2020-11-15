@@ -109,6 +109,7 @@ public class GraphQLDataFetchers {
                 match.put("gameMoment", document.getString("gameMoment"));
                 match.put("players", document.get("players"));
                 match.put("uid", document.getString("uid"));
+                match.put("docId", document.getId());
 
                 result.add(match);
             }
