@@ -159,12 +159,12 @@ public class GraphQLDataFetchers {
             docData.put("name", docUser.get().get("name"));
             docData.put("comment", args.get("comment"));
 
-            Object arrayList = new ArrayList<>();
+            Object arrayList = new ArrayList<HashMap>();
 
             if(docMatch.get("comments") != null) {
                 arrayList = docMatch.get("comments");
-                ((ArrayList) arrayList).add(docData);
             }
+            ((ArrayList) arrayList).add(docData);
             listDocData.add(docData);
 
             docRefMatch.update("comments",arrayList);
