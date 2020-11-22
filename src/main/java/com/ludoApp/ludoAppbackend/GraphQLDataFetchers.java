@@ -105,21 +105,11 @@ public class GraphQLDataFetchers {
             for (QueryDocumentSnapshot document : documents) {
                 Map<String, Object> match = new HashMap<>();
 
-                if (document.get("game") != null) {
-                    match.put("game", document.get("game"));
-                }
-                if (document.get("gameMoment") != null) {
-                    match.put("gameMoment", document.getString("gameMoment"));
-                }
-                if (document.get("players") != null) {
-                    match.put("players", document.get("players"));
-                }
-                if (document.get("uid") != null) {
-                    match.put("uid", document.getString("uid"));
-                }
-                if (document.get("comments") != null) {
-                    match.put("comments", document.get("comments"));
-                }
+                match.put("game", document.get("game"));
+                match.put("gameMoment", document.getString("gameMoment"));
+                match.put("players", document.get("players"));
+                match.put("uid", document.getString("uid"));
+                match.put("comments", document.get("comments"));
                 match.put("docId", document.getId());
 
                 result.add(match);
