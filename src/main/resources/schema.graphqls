@@ -17,6 +17,11 @@ type User {
     password: String
 }
 
+input AuthData {
+    email: String!
+    password: String!
+}
+
 type Friend {
     uid: ID
     name: String
