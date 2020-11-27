@@ -1,7 +1,7 @@
 type Query {
     userInfoById(id: String!): UserInfo
     usersInfo: [UserInfo]
-    matchByID(id: ID): Match
+    matchByID(id: ID!): Match
     matches: [Match]
 }
 
