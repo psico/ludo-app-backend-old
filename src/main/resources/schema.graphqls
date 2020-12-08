@@ -6,8 +6,8 @@ type Query {
 }
 
 type Mutation {
-    createMatch(match: MatchInput!): Match
-    createComment(commentInput: CommentInput!): Comment
+    createMatch(match: MatchInput): Match
+    createComment(commentInput: CommentInput): Comment
     createUser(name: String!, authProvider: AuthData!): User
     createLink(url: String!, description: String!): Link
 }
