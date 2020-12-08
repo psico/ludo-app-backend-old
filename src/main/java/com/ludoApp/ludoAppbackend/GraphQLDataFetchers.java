@@ -143,7 +143,7 @@ public class GraphQLDataFetchers {
 
     public DataFetcher createComment() {
         return dataFetchingEnvironment -> {
-            Map<String,Object> args = dataFetchingEnvironment.getArgument("comment");
+            Map<String,Object> args = dataFetchingEnvironment.getArgument("commentInput");
             List<Map<String, Object>> listDocData = new ArrayList<>();
 
             DocumentReference docRefMatch = this.matchesCollection.document(args.get("matchId").toString());
