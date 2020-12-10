@@ -99,7 +99,7 @@ public class GraphQLDataFetchers {
         List<Map<String, Object>> result = new ArrayList<>();
 
         try {
-            QuerySnapshot querySnapshot = FirestoreClient.getFirestore().collection("matches").get().get();
+            QuerySnapshot querySnapshot = this.matchesCollection.get().get();
             List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
             for (QueryDocumentSnapshot document : documents) {
