@@ -1,3 +1,6 @@
+# NOTICE
+This project will be discontinued for another version using node.
+
 <h1 align="center">
   LudoApp Backend
 </h1>
